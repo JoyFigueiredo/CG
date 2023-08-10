@@ -16,7 +16,7 @@ void circulos(int numPontos, float raio, float xx)
 
     for(int i=0; i< numPontos; i++ )
     {
-        float angulo = 2 * 3.14* i / numPontos;
+        float angulo = 2 * 3.14* i / numPontos; // 2 pi i/numPontos
         float x = raio* cos(angulo)+xx;
         float y = raio * sin(angulo);
 
@@ -38,9 +38,9 @@ void display()
 {
     glClear(GL_COLOR_BUFFER_BIT); //Limpa o buffer
 
-    glPointSize(2); //Tamanho do ponto
-    float raio = 0.3; // Tamanho do raio
-    float espaco = 0.65; // Tamanho do espaço do circulo
+    glPointSize(5); //Tamanho do ponto
+    float raio = 8; // Tamanho do raio
+    float espaco = 17; // Tamanho do espaço do circulo
 
     // PRIMEIRO CIRCULO 7 PONTOS
     glColor3f(3,0,2);
@@ -61,8 +61,19 @@ void display()
 
 
 // função de redimensionamento da janela de visualização
-static void resize(int width, int height)
-{
+static void resize(int width, int height){
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity() ;
+    //gluOrtho2D (-40.0f, 40.0f, -40.0f, 40.0f);
+
+    // estabelece a janela de seleção (esquerda, direita, inferior,
+    // superior) mantendo a proporção com a janela de visualizão
+    if (width <= height)
+        gluOrtho2D (-20.0f, 20.0f, -20.0f*height/width, 20.0f*height/width);
+    else
+        gluOrtho2D (-20.0f*width/height, 20.0f*width/height, -20.0f, 20.0f);
 }
 
 // função para tratar os eventos do teclado
