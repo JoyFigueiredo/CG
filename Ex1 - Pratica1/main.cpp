@@ -12,13 +12,19 @@
 // Função onde sera passado a quantidade de pontos e o raio dos pontos
 void circulos(int numPontos, float raio, float xx)
 {
-    glBegin(GL_POINTS); // modo desenho dos pontos iniciada
+    glBegin(GL_LINE_STRIP); // modo desenho dos pontos iniciada
 
     for(int i=0; i< numPontos; i++ )
     {
         float angulo = 2 * 3.14* i / numPontos; // 2 pi i/numPontos
         float x = raio* cos(angulo)+xx;
         float y = raio * sin(angulo);
+
+        float auxX, auxY;
+        if(i == 0){
+            auxX = x;
+            auxY = y;
+        }
 
         //Desenha o ponto
         if(numPontos == 7){
@@ -27,6 +33,10 @@ void circulos(int numPontos, float raio, float xx)
             glVertex2f(x,y);
         }else if(numPontos == 30){
             glVertex2f(x,y);
+        }
+
+        if(i == numPontos-1){
+            glVertex2f(auxX,auxY);
         }
     }
 
@@ -38,7 +48,7 @@ void display()
 {
     glClear(GL_COLOR_BUFFER_BIT); //Limpa o buffer
 
-    glPointSize(5); //Tamanho do ponto
+    //glPointSize(5); //Tamanho do ponto
     float raio = 8; // Tamanho do raio
     float espaco = 17; // Tamanho do espaço do circulo
 
@@ -71,9 +81,9 @@ static void resize(int width, int height){
     // estabelece a janela de seleção (esquerda, direita, inferior,
     // superior) mantendo a proporção com a janela de visualizão
     if (width <= height)
-        gluOrtho2D (-20.0f, 20.0f, -20.0f*height/width, 20.0f*height/width);
+        gluOrtho2D (-40.0f, 40.0f, -40.0f*height/width, 40.0f*height/width);
     else
-        gluOrtho2D (-20.0f*width/height, 20.0f*width/height, -20.0f, 20.0f);
+        gluOrtho2D (-40.0f*width/height, 40.0f*width/height, -40.0f, 40.0f);
 }
 
 // função para tratar os eventos do teclado
@@ -94,7 +104,7 @@ int main(int argc, char *argv[])
 // define do modo de operação da GLUT
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 // especifica o tamanho inicial em pixels da janela GLUT
-    glutInitWindowSize(400, 400);
+    glutInitWindowSize(600, 400);
 // especifica a posição inicial da janela GLUT
     glutInitWindowPosition(100, 100);
 // cria a janela passando como título como argumento
