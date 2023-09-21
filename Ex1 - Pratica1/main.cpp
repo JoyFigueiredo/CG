@@ -12,19 +12,13 @@
 // Função onde sera passado a quantidade de pontos e o raio dos pontos
 void circulos(int numPontos, float raio, float xx)
 {
-    glBegin(GL_LINE_STRIP); // modo desenho dos pontos iniciada
+    glBegin(GL_LINE_LOOP); // modo desenho dos pontos iniciada
 
     for(int i=0; i< numPontos; i++ )
     {
         float angulo = 2 * 3.14* i / numPontos; // 2 pi i/numPontos
         float x = raio* cos(angulo)+xx;
         float y = raio * sin(angulo);
-
-        float auxX, auxY;
-        if(i == 0){
-            auxX = x;
-            auxY = y;
-        }
 
         //Desenha o ponto
         if(numPontos == 7){
@@ -33,10 +27,6 @@ void circulos(int numPontos, float raio, float xx)
             glVertex2f(x,y);
         }else if(numPontos == 30){
             glVertex2f(x,y);
-        }
-
-        if(i == numPontos-1){
-            glVertex2f(auxX,auxY);
         }
     }
 
