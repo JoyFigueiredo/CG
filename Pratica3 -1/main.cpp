@@ -74,24 +74,27 @@ static void display(){
     glPushMatrix();
         //QUADRADO 1
         glColor3f(0, 1, 0);
-        glTranslatef(23 ,23, 0.0f);
+
         glScalef(posicaoX+escala,posicaoY+escala,0);
+        glTranslatef(23 ,23, 0.0f);
         quadrado();
     glPopMatrix();
 
     glPushMatrix();
         //QUADRADO 2
         glColor3f(1, 0, 0);
-        glTranslatef(-23 ,23, 0.0f);
+
         glScalef(posicaoX+escala,posicaoY+escala,0);
+        glTranslatef(-23 ,23, 0.0f);
         quadrado();
     glPopMatrix();
 
     glPushMatrix();
         //QUADRADO 3
         glColor3f(1, 1, 0);
-        glTranslatef(23 ,-23, 0.0f);
+
         glScalef(posicaoX+escala,posicaoY+escala,0);
+        glTranslatef(23 ,-23, 0.0f);
         quadrado();
     glPopMatrix();
 

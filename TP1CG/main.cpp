@@ -8,13 +8,56 @@
 
 //variáveis para controle da translação
 GLfloat posicaoX=0, posicaoY=0;
-//variável para controle da escala
 GLfloat escala = 1;
-GLfloat angulo= 0;
+GLfloat angulo = 0;
+GLfloat aux = 0;
+
+//Triangulo GRANDE1
+GLfloat posicaoX1=0, posicaoY1=0;
+GLfloat escala1 = 1;
+GLfloat angulo1 = 0;
+GLfloat aux1 = 0;
+
+//Triangulo GRANDE2
+GLfloat posicaoX2=0, posicaoY2=0;
+GLfloat escala2 = 1;
+GLfloat angulo2 = 0;
+GLfloat aux2 = 0;
+
+//Triangulo Medio2
+GLfloat posicaoX3=0, posicaoY3=0;
+GLfloat escala3 = 1;
+GLfloat angulo3 = 0;
+GLfloat aux3 = 0;
+
+//Triangulo pequeno1
+GLfloat posicaoX4=0, posicaoY4=0;
+GLfloat escala4 = 1;
+GLfloat angulo4 = 0;
+GLfloat aux4 = 0;
+
+//Triangulo pequeno2
+GLfloat posicaoX5=0, posicaoY5=0;
+GLfloat escala5 = 1;
+GLfloat angulo5 = 0;
+GLfloat aux5 = 0;
+
+//Quadrado
+GLfloat posicaoX6=0, posicaoY6=0;
+GLfloat escala6 = 1;
+GLfloat angulo6 = 0;
+GLfloat aux6 = 0;
+
+//Paralelogramo
+GLfloat posicaoX7=0, posicaoY7=0;
+GLfloat escala7 = 1;
+GLfloat angulo7 = 0;
+GLfloat aux7 = 0;
+
+int peca=0;
 
 static void resize(int width, int height)
 {
-
     // Especifica as dimensões da Viewport
     glViewport(0, 0, width, height);
 
@@ -30,121 +73,184 @@ static void resize(int width, int height)
         gluOrtho2D (-40.0f*width/height, 40.0f*width/height, -40.0f, 40.0f);
 }
 
-void quadrado(){
+/*
+*=============================================================
+*               Formas Geometricas
+*=============================================================
+*/
+void quadrado()
+{
     glBegin(GL_QUADS); // modo desenho dos pontos iniciada
-        glVertex2f(-20,-20);
-        glVertex2f(20,-20);
-        glVertex2f(20,20);
-        glVertex2f(-20,20);
+    glVertex2f(-20,-20);
+    glVertex2f(20,-20);
+    glVertex2f(20,20);
+    glVertex2f(-20,20);
     glEnd();
 }
 
-void losangulo(){
+void paralelogramo()
+{
     glBegin(GL_POLYGON); // modo desenho dos pontos iniciada
-        glVertex2f(-20,-20);
-        glVertex2f(10,-10);
-        glVertex2f(20,20);
-        glVertex2f(-10,10);
+    glVertex2f(-10, -10); //A
+    glVertex2f(30, -10); //B
+    glVertex2f(10, 10); //C
+    glVertex2f(-30, 10); //D
     glEnd();
 }
 
-void triangulo(){
+void triangulo()
+{
     glBegin(GL_TRIANGLES); // modo desenho dos pontos iniciada
-        glVertex2f(-20,-20);
-        glVertex2f(0,0);
-        glVertex2f(-20,20);
+    glVertex2f(-20,-20);
+    glVertex2f(0,0);
+    glVertex2f(-20,20);
     glEnd();
 }
 
 
-void quadradoPrincipal(){
+void quadradoPrincipal()
+{
     glBegin(GL_LINE_LOOP); // modo desenho dos pontos iniciada
-        glVertex2f(-20,-20);
-        glVertex2f(20,-20);
-        glVertex2f(20,20);
-        glVertex2f(-20,20);
+    glVertex2f(-20,-20);
+    glVertex2f(20,-20);
+    glVertex2f(20,20);
+    glVertex2f(-20,20);
     glEnd();
 }
+/*
+*=============================================================
+*/
 
-static void display(){
+static void display()
+{
     glClear(GL_COLOR_BUFFER_BIT);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glTranslated(posicaoX, posicaoY,0);
-
+    switch (peca){
+    case 1:
+        posicaoX1 = posicaoX;
+        angulo1 = angulo;
+        posicaoY1 = posicaoY;
+        aux = 0;
+        break;
+    case 2:
+        posicaoX2 = posicaoX;
+        angulo2 = angulo;
+        posicaoY2 = posicaoY;
+        aux = 0;
+        break;
+    case 3:
+        posicaoX3 = posicaoX;
+        angulo3 = angulo;
+        posicaoY3 = posicaoY;
+        aux = 0;
+        break;
+    case 4:
+        posicaoX4 = posicaoX;
+        angulo4 = angulo;
+        posicaoY4 = posicaoY;
+        aux = 0;
+        break;
+    case 5:
+        posicaoX5 = posicaoX;
+        angulo5 = angulo;
+        posicaoY5 = posicaoY;
+        aux = 0;
+        break;
+    case 6:
+        posicaoX6 = posicaoX;
+        angulo6 = angulo;
+        posicaoY6 = posicaoY;
+        aux = 0;
+        break;
+    case 7:
+        posicaoX7 = posicaoX;
+        angulo7 = angulo;
+        posicaoY7 = posicaoY;
+        aux = 0;
+    break;
+    }
     glPushMatrix();
         //QUADRADO MAIOR
         glColor3f(0, 0, 0);
         glTranslatef(0.0f ,0.0f, 0.0f);
-        glScalef(posicaoX+escala,posicaoY+escala,0);
+        glScalef(1,1,0);
         quadradoPrincipal();
     glPopMatrix();
 
-    glPushMatrix();
-        //Triangulo GRANDE1
-        glColor3f(0, 0, 1);
-        glTranslatef(0.0f ,0.0f, 0.0f);
-        glScalef(posicaoX+escala,posicaoY+escala,0);
-        triangulo();
-    glPopMatrix();
-
-    glPushMatrix();
-        //Triangulo GRANDE2
-        glColor3f(0, 1, 0);
-        glTranslatef(0.0f ,0.0f, 0.0f);
-        glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
-        glScalef(posicaoX+escala,posicaoY+escala,0);
-        triangulo();
-    glPopMatrix();
-
-    glPushMatrix();
-        //Triangulo Medio2
-        glColor3f(0, 1, 1);
-        glTranslatef(20.0f ,-20.0f, 0.0f);
-        glRotatef(-225.0f, 0.0f, 0.0f, 1.0f);
-         glScalef(-1.0f, 1.0f, 1.0f);
-        glScalef((posicaoX+escala)*0.73,(posicaoY+escala)*0.73,0);
-        triangulo();
-    glPopMatrix();
-
-
-    glPushMatrix();
-        //Triangulo pequeno1
-        glColor3f(1, 0, 0);
-        glTranslatef(-10.0f ,-10.0f, 0.0f);
-        glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
-        glScalef((posicaoX+escala)*0.5,(posicaoY+escala)*0.5,0);
-        triangulo();
-    glPopMatrix();
-
-    glPushMatrix();
-        //Triangulo pequeno2
-        glColor3f(1, 0, 1);
-        glTranslatef(0.0f ,0.0f, 0.0f);
-        glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
-        glScalef((posicaoX+escala)*0.5,(posicaoY+escala)*0.5,0);
-        triangulo();
-    glPopMatrix();
-
-    glPushMatrix();
-        //Quadrado
-        glColor3f(1, 1, 0);
-        glTranslatef(0.0f ,-10.0f, 0.0f);
-        glRotatef(45.0f, 0.0f, 0.0f, 1.0f);
-        glScalef((posicaoX+escala)*0.35,(posicaoY+escala)*0.35,0);
-        quadrado();
-    glPopMatrix();
+        glPushMatrix();
+            //Triangulo GRANDE1
+            glColor3f(0, 0, 1);
+            glTranslated(posicaoX1, posicaoY1,0);
+            glTranslatef(0.0f ,0.0f, 0.0f);
+            glRotatef(0.0f+angulo1, 0.0f, 0.0f, 1.0f);
+            glScalef(1,1,0);
+            triangulo();
+        glPopMatrix();
 
         glPushMatrix();
-        //Losangulo
+            //Triangulo GRANDE2
+            glColor3f(0, 1, 0);
+            glTranslated(posicaoX2, posicaoY2,0);
+            glTranslatef(0.0f ,0.0f, 0.0f);
+            glRotatef(-90.0f+angulo2, 0.0f, 0.0f, 1.0f);
+            glScalef(1,1,0);
+            triangulo();
+        glPopMatrix();
+
+        glPushMatrix();
+            //Triangulo Medio2
+            glColor3f(0, 1, 1);
+            glTranslated(posicaoX3, posicaoY3,0);
+            glTranslatef(20.0f ,-20.0f, 0.0f);
+            glScalef(1*0.72,1*0.72,0);
+            glRotatef(-225.0f + angulo3, 0.0f, 0.0f, 1.0f);
+             glScalef(-1.0f, 1.0f, 1.0f);
+
+            triangulo();
+        glPopMatrix();
+
+
+        glPushMatrix();
+            //Triangulo pequeno1
+            glColor3f(1, 0, 0);
+            glTranslated(posicaoX4, posicaoY4,0);
+            glTranslatef(-10.0f ,-10.0f, 0.0f);
+            glScalef(1*0.5,1*0.5,0);
+            glRotatef(angulo4+90.0f, 0.0f, 0.0f, 1.0f);
+            triangulo();
+        glPopMatrix();
+
+        glPushMatrix();
+            //Triangulo pequeno2
+            glColor3f(1, 0, 1);
+            glTranslated(posicaoX5, posicaoY5,0);
+            glTranslatef(0.0f ,0.0f, 0.0f);
+            glRotatef(angulo5+180.0f, 0.0f, 0.0f, 1.0f);
+            glScalef(1*0.5,1*0.5,0);
+            triangulo();
+        glPopMatrix();
+
+        glPushMatrix();
+            //Quadrado
+            glColor3f(1, 1, 0);
+            glTranslated(posicaoX6, posicaoY6,0);
+            glTranslatef(0.0f ,-10.0f, 0.0f);
+            glScalef(1*0.35,1*0.35,0);
+            glRotatef(angulo6+45.0f, 0.0f, 0.0f, 1.0f);
+            quadrado();
+        glPopMatrix();
+
+    glPushMatrix();
+        //Paralelogramo
         glColor3f(1, 1, 1);
-        glTranslatef(10.0f ,10.0f, 0.0f);
-        glRotatef(120.0f, 0.0f, 0.0f, 1.0f);
-         glScalef(-1.0f, 1.0f, 1.0f);
-        glScalef((posicaoX+escala)*0.5,(posicaoY+escala)*0.5,0);
-        losangulo();
+        glTranslated(posicaoX7, posicaoY7,0);
+        glScalef(1*0.5,1*0.5,0);
+        glTranslatef(30.0f,10.0f, 0.0f);
+        glRotatef(angulo7+90.0f, 0.0f, 0.0f, 1.0f);
+        paralelogramo();
     glPopMatrix();
 
     glFlush();
@@ -155,34 +261,70 @@ static void key(unsigned char key, int x, int y)
 {
     if (key == 27)
         exit(0);
+    else if(key == 'a'){
+        aux = 0;
+    }else if(key == 'b'){
+        aux = 1;
+    }else if(key == '1'){
+        peca=1;
+    }else if(key == '2'){
+        peca=2;
+    }else if(key == '3'){
+        peca=3;
+    }else if(key == '4'){
+        peca=4;
+    }else if(key == '5'){
+        peca=5;
+    }else if(key == '6'){
+        peca=6;
+    }else if(key == '7'){
+        peca=7;
+    }
 }
 
 // função para tratar os eventos do teclado para teclas Especiais
 static void specialkey(int key, int x, int y)
 {
-    switch (key)
-    {
+    switch (key){
     case GLUT_KEY_LEFT:
-        posicaoX--;
-        angulo = angulo + 45;
+        if(aux ==0){
+            posicaoX--;
+        }else{
+            angulo = angulo + 45;
+        }
         break;
     case GLUT_KEY_RIGHT:
-        posicaoX++;
-        angulo = angulo - 45;
+        if(aux ==0){
+            posicaoX++;
+        }else{
+            angulo = angulo - 45;
+        }
         break;
     case GLUT_KEY_UP:
-        posicaoY++;
-        angulo = angulo - 45;
+        if(aux ==0){
+            posicaoY++;
+        }else{
+            angulo = angulo - 45;
+        }
         break;
     case GLUT_KEY_DOWN:
-        posicaoY--;
-        angulo = angulo + 45;
+        if(aux ==0){
+            posicaoY--;
+        }else if(aux==1){
+            angulo = angulo + 45;
+        }
         break;
     case GLUT_KEY_HOME:
         escala += 0.3;
         break;
     case GLUT_KEY_END:
         escala -= 0.3;
+        break;
+
+    case '7':
+        posicaoX7 = posicaoX;
+        angulo7 = angulo;
+        posicaoY7 = posicaoY;
         break;
     }
 
@@ -218,7 +360,7 @@ int main(int argc, char *argv[])
     glutInitWindowPosition(100, 100);
 
     // cria a janela passando como título como argumento
-    glutCreateWindow("Projeto 03");
+    glutCreateWindow("Trabalho Pratico Tangram");
 
     // registra a função callback de redesenho da janela de visualização
     glutDisplayFunc(display);
