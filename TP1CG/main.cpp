@@ -130,7 +130,7 @@ static void display()
 
     switch (peca){
     case 1:
-        posicaoX1 = posicaoX;
+        posicaoX1 =posicaoX1+ posicaoX;
         angulo1 = angulo;
         posicaoY1 = posicaoY;
         aux = 0;
